@@ -1,8 +1,8 @@
 import invariant from 'tiny-invariant'
 import { getFeatureToggleDefinitions, startUnleash } from 'unleash-client'
-import { Operator } from 'unleash-client/lib/strategy/strategy'
-import { FeatureFlags } from '~/feature-flags'
-import users from '~/mock/users.json'
+// import { Operator } from 'unleash-client/lib/strategy/strategy'
+// import { FeatureFlags } from '~/feature-flags'
+// import users from '~/mock/users.json'
 
 const { UNLEASH_SERVER_URL, UNLEASH_SERVER_TOKEN, UNLEASH_APPLICATION_NAME } =
   process.env
