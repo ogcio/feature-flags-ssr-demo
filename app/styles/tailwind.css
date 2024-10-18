@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-sans;
+  @apply px-8 py-12;
+}
+
+h1 {
+  @apply text-4xl font-bold mt-6 mb-4;
+}
+
+a {
+  @apply text-blue-500;
+}
+
+button {
+  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded-full;
+}
+
+button:hover {
+  @apply bg-blue-700;
+}
+
+button:disabled {
+  @apply bg-gray-300 text-gray-500;
+}
+
+button:after {
+  content: '→';
+  margin-left: 0.5em;
+}
+
+button:disabled:after {
+  content: '…';
+}
+
+#login {
+  @apply p-4 rounded-lg flex items-center justify-center flex-col gap-x-4 max-w-md mx-auto;
+}
+
+#login > * {
+  @apply w-full flex;
+}
+
+#login button {
+  @apply justify-center items-center;
+}
+
+#login select {
+  @apply m-4;
+}
+
+.label {
+  @apply px-2 py-1 rounded-full bg-zinc-950 text-white;
+}

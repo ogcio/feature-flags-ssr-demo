@@ -1,14 +1,18 @@
-# Remix
+# Feature-Flags Demo Application
 
-This directory is a brief example of a [Remix](https://remix.run/docs) site that can be deployed to Vercel with zero configuration.
+This application provides example usages of different feature-flags OSS software:
 
-To get started, run the Remix cli with this template
+- ...
+
+To get started, install dependencies and run the development server:
 
 ```sh
-npx create-remix@latest --template vercel/vercel/examples/remix
+npm i && npm run dev
 ```
 
-## Deploy Your Own
+Open up [http://localhost:5173](http://localhost:5173) and login with one of the users in the select input.
+
+## Deployment
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/remix&template=remix)
 
