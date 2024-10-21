@@ -6,6 +6,8 @@ export type User = {
   userId: string
 }
 
-export const findUser = async (user: User): Promise<User | undefined> => {
-  return users.find((u) => u.email === user.email)
+export const findUser = async ({
+  email,
+}: { email: User['email'] }): Promise<User | undefined> => {
+  return users.find((u) => u.email === email)
 }

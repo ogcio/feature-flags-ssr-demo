@@ -1,31 +1,27 @@
-import { FeatureFlags } from '~/feature-flags'
-import { flagsmith } from '~/services/flagsmith.server'
+import { FeatureFlags, reduceFeatureFlags } from '~/feature-flags'
+import { getFlagsmithClient } from '~/services/flagsmith.server'
 import type { User } from '~/services/user.mock.server'
 
 const getFlagsmithFeatureFlags = async ({
   user,
-  // biome-ignore lint/correctness/noUnusedVariables:
-  request,
 }: {
   user: User
-  request: Request
 }) => {
-  const flagsmithContext = {
-    region: process.env.VERCEL_REGION ?? '',
+  const client = getFlagsmithClient()
+
+  const context = {
     name: user.username,
     email: user.email,
   }
-  const flagsmithFeatureFlagsClient = await flagsmith.getIdentityFlags(
-    user.userId,
-    flagsmithContext,
-  )
-  
+
+  const flags = await client.getIdentityFlags(user.userId, context)
+
   return Object.values(FeatureFlags)
     .filter((key) => key.startsWith('flagsmith'))
     .reduce(
       (acc, flag: string) => {
         acc[flag as keyof typeof FeatureFlags] =
-          flagsmithFeatureFlagsClient.isFeatureEnabled(flag)
+        flags.isFeatureEnabled(flag)
         return acc
       },
       {} as Record<keyof typeof FeatureFlags, boolean>,

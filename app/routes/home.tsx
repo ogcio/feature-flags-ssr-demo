@@ -1,14 +1,7 @@
 import { Form, Outlet, useLoaderData } from '@remix-run/react'
-import type { LoaderFunctionArgs, MetaFunction } from '@vercel/remix'
+import type { LoaderFunctionArgs } from '@vercel/remix'
 import { useIsLoading } from '~/hooks/useIsLoading'
 import { authenticator } from '~/services/auth.server'
-
-export const meta: MetaFunction = () => {
-  return [
-    { title: 'New Remix App' },
-    { name: 'description', content: 'Welcome to Remix!' },
-  ]
-}
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return await authenticator.isAuthenticated(request, {

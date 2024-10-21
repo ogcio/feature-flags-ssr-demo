@@ -1,29 +1,28 @@
 import { type IUser, UserBuilder } from '@featbit/node-server-sdk'
-import { useCallback } from 'react'
 import { promiseHash } from 'remix-utils/promise'
 import { FeatureFlags } from '~/feature-flags'
-import { featbit } from '~/services/featbit.server'
+import { getFeatbitClient } from '~/services/featbit.server'
 import type { User } from '~/services/user.mock.server'
 
 const getFeatbitFeatureFlags = async ({
   user,
-  // biome-ignore lint/correctness/noUnusedVariables:
-  request,
-}: { user: User; request: Request }) => {
-  const featbitContext: IUser = new UserBuilder(user.userId)
+}: { user: User }) => {
+  // NOTE: This is a singleton instance of the client,
+  // there's no actual awaiting if it has already been initialized  
+  const client = await getFeatbitClient()
+
+  const context: IUser = new UserBuilder(user.userId)
     .name(user.username)
     .custom('email', user.email)
-    .custom('region', process.env.VERCEL_REGION ?? '')
     .build()
-  const featbitClient = await featbit()
-
+    
   const featbitFeatureFlagsPromises = Object.values(FeatureFlags)
     .filter((key) => key.startsWith('featbit'))
     .reduce(
       (acc, flag: string) => {
-        acc[flag as keyof typeof FeatureFlags] = featbitClient.boolVariation(
+        acc[flag as keyof typeof FeatureFlags] = client.boolVariation(
           flag,
-          featbitContext,
+          context,
           false,
         )
         return acc

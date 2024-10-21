@@ -5,15 +5,27 @@ const { GROWTHBOOK_CLIENT_KEY, GROWTHBOOK_API_URL } = process.env
 invariant(GROWTHBOOK_CLIENT_KEY, 'GROWTHBOOK_CLIENT_KEY is required')
 invariant(GROWTHBOOK_API_URL, 'GROWTHBOOK_API_URL is required')
 
+let growthbookClientInstance: GrowthBook | null = null
+
 const getGrowthbookClient = async () => {
-  const growthbook = new GrowthBook({
+  if (growthbookClientInstance) {
+    return growthbookClientInstance
+  }
+
+  growthbookClientInstance = new GrowthBook({
     clientKey: GROWTHBOOK_CLIENT_KEY,
     apiHost: GROWTHBOOK_API_URL,
   })
 
-  await growthbook.init()
+  try {
+    await growthbookClientInstance.init()
 
-  return growthbook
+    return growthbookClientInstance
+    
+  } catch (err) {
+    console.error(err)
+    throw err
+  }
 }
 
 export { getGrowthbookClient }

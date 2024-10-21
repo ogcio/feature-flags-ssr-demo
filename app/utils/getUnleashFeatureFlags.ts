@@ -1,31 +1,24 @@
 import type { Context } from 'unleash-client'
-import { FeatureFlags } from '~/feature-flags'
-import { unleash } from '~/services/unleash.server'
+import { FeatureFlags, reduceFeatureFlags } from '~/feature-flags'
+import { getUnleashClient } from '~/services/unleash.server'
 import type { User } from '~/services/user.mock.server'
 
-const getUnleashFeatureFlags = async ({
-  user,
-  request,
-}: { user: User; request: Request }) => {
-  const unleashContext = {
+const getUnleashFeatureFlags = async ({ user }: { user: User }) => {
+  // NOTE: This is a singleton instance of the client,
+  // there's no actual awaiting if it has already been initialized
+  const client = await getUnleashClient()
+
+  const context = {
     userId: user.userId,
-    sessionId: '123',
-    remoteAddress:
-      request.headers.get('x-real-ip') ??
-      request.headers.get('x-forwarded-for') ??
-      '127.0.0.1',
-    properties: {
-      region: process.env.VERCEL_REGION,
-    },
   } satisfies Context
 
   return Object.values(FeatureFlags)
     .filter((key) => key.startsWith('unleash'))
     .reduce(
       (acc, flag: string) => {
-        acc[flag as keyof typeof FeatureFlags] = unleash.isEnabled(
+        acc[flag as keyof typeof FeatureFlags] = client.isEnabled(
           flag,
-          unleashContext,
+          context,
         )
         return acc
       },
