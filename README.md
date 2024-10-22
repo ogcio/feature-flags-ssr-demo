@@ -281,7 +281,7 @@ The application looks for a feature flag named `{backend}-test-flag` in each bac
 ![alt text](img/image-2.png)
 
 #### Featbit Frontend
-![alt text](img/image-1.png)                                                                             |
+![alt text](img/image-1.png)                                                                             
 
 #### GrowthBook Frontend
 ![alt text](img/image.png)
@@ -392,6 +392,7 @@ Key points to highlight about FeatBit:
 
 - It's more infrastructure-heavy than both Flagsmith and Unleash, requiring both MongoDB and Redis.
 - The WebSocket-first approach provides real-time updates but adds complexity.
+
 Being newer in the market means:
 
 - Less mature ecosystem
@@ -404,7 +405,6 @@ Being newer in the market means:
 Key differentiators of GrowthBook:
 
 - It's more focused on experimentation and A/B testing than pure feature flagging
-
   - Built-in statistical analysis
   - Visual results dashboard
   - Multiple experiment types
