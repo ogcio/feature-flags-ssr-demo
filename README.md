@@ -274,6 +274,20 @@ The application looks for a feature flag named `{backend}-test-flag` in each bac
 | API Type              | REST      | REST     | REST+WS  | GraphQL    |
 | Offline Mode          | ✅        | ✅       | ✅       | ✅         |
 | Documentation Quality  | High      | High     | Medium   | High       |
+| Backend Language      | Python    | Node.js  | .NET   | Node.js    |
+| Backend Framework     | Django    | Express  | ?  | Express    |
+
+#### Flagsmith Frontend
+![alt text](img/image-2.png)
+
+#### Featbit Frontend
+![alt text](img/image-1.png)                                                                             |
+
+#### GrowthBook Frontend
+![alt text](img/image.png)
+
+#### Unleash Frontend
+![alt text](img/image-3.png)
 
 ### Targeting & Rules
 
