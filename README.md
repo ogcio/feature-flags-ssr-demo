@@ -9,6 +9,23 @@ This application showcases the usage of feature flags with different backends. T
 
 Note: [Flipt](https://docs.flipt.io/) has also been considered but at the moment [it does not provide](https://github.com/flipt-io/flipt-client-sdks/issues/345) with a React Native client.
 
+TL;DR
+
+| Feature (OSS offer)     | Flagsmith | Unleash  | FeatBit   | GrowthBook |
+|-------------------------|-----------|----------|-----------|------------|
+| OpenID Connect          | ?         | ✅       | ❌        | ❌         |
+| Environments            | Unlimited | 2        | Unlimited | Unlimited  |
+| Projects                | 1         | 1        | Unlimited | Unlimited  |
+| Organisations           | Unlimited | ❌       | ❌        | ❌         |
+| Language (BE)           | ❌        | ✅       | ✅        | ✅         |
+| Language (FE)           | ❌        | ✅       | ❌        | ✅         |
+| Operational Complexity  | ❌        | ✅       | ❌        | ✅         |
+| OpenTelemetry Support   | ✅        | ✅       | ❌        | ❌         |
+
+**WIP**
+- OpenID Connect Logto integration
+- OpenTelmetry support
+
 Get started:
 
 - Install dependencies with `npm i`
@@ -22,6 +39,7 @@ Notes:
 - You can start the application without any backends. The color of the feature flag status will be purple. If you only want to test only one or more backends, you can do that.
 - The application uses the `userId` field to target users. You can see the `userId` when you're logged in with that user in the application.
 - Replace `XXXXX` in the environment variables with the actual values for each backend. If you update the environment variables, please restart the application for the changes to take effect.
+- Look in the `docs` folder for more information about each backend.
 
 ## Start the backends
 
