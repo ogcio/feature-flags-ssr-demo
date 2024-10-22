@@ -19,7 +19,7 @@ TL;DR
 | Organisations           | Unlimited | ❌       | ❌        | ❌         |
 | Language (BE)           | ❌        | ✅       | ✅        | ✅         |
 | Language (FE)           | ❌        | ✅       | ❌        | ✅         |
-| Operational Complexity  | ❌        | ✅       | ❌        | ✅         |
+| Operational Complexity  | ✅        | ✅       | ❌        | ✅         |
 | OpenTelemetry Support   | ✅        | ✅       | ❌        | ❌         |
 
 **WIP**
