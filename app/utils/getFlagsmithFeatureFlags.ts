@@ -1,4 +1,4 @@
-import { FeatureFlags, reduceFeatureFlags } from '~/feature-flags'
+import { FeatureFlags } from '~/feature-flags'
 import { getFlagsmithClient } from '~/services/flagsmith.server'
 import type { User } from '~/services/user.mock.server'
 

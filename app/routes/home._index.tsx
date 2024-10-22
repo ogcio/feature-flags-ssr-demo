@@ -23,7 +23,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   let flagsmithError = false
   let growthbookError = false
 
-  // NOTE: Request feature flags one by one backend to catch errors
+  // NOTE: Request feature flags one by one backend to catch errors for each
   try {
     unleashFeatureFlags = await getUnleashFeatureFlags({
       user,
@@ -44,8 +44,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     flagsmithFeatureFlags = await getFlagsmithFeatureFlags({
       user,
     })
-  } catch (err) {
-    console.error(err)
+  } catch {
     flagsmithError = true
   }
 
@@ -73,7 +72,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Screen() {
   const featureFlags = useLoaderData<typeof loader>()
-  console.dir(featureFlags, { depth: null })
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
       <h1>Feature Flags</h1>
@@ -84,7 +82,7 @@ export default function Screen() {
               featureFlags.errors[
                 flag.split('-')[0] as keyof typeof featureFlags.errors
               ]
-            // @ts-ignore
+            // @ts-expect-error: yes okay
             const featureFlag = featureFlags[flag as keyof typeof FeatureFlags]
             return (
               <div

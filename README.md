@@ -1,11 +1,13 @@
 # Feature-Flags Demo Application
 
-This application showcases the usage of feature flags for different backends. The application uses the following backends to manage feature flags:
+This application showcases the usage of feature flags with different backends. The application uses the following backends to manage feature flags:
 
 - [Unleash](https://getunleash.io/)
 - [FeatBit](https://www.featbit.co/)
 - [Flagsmith](https://flagsmith.com/)
 - [GrowthBook](https://www.growthbook.io/)
+
+Note: [Flipt](https://docs.flipt.io/) has also been considered but at the moment [it does not provide](https://github.com/flipt-io/flipt-client-sdks/issues/345) with a React Native client.
 
 Get started:
 
@@ -17,7 +19,7 @@ Get started:
 Notes:
 
 - The application uses server-side client SDKs to fetch feature flags from each backend
-- You can start the application without any backends. The color of the feature flag status will be purple. If you only want to test one or more backends, you can do that.
+- You can start the application without any backends. The color of the feature flag status will be purple. If you only want to test only one or more backends, you can do that.
 - The application uses the `userId` field to target users. You can see the `userId` when you're logged in with that user in the application.
 - Replace `XXXXX` in the environment variables with the actual values for each backend. If you update the environment variables, please restart the application for the changes to take effect.
 
@@ -234,9 +236,12 @@ The application looks for a feature flag named `{backend}-test-flag` in each bac
 - Check that the feature flag is green in the application for the user you're logged in with
 - Logout, login with another user and check that the feature flag is red
 
+## Features comparison
+
 |-|Unleash|FeatBit|Flagsmith|GrowthBook|
 |-|-------|-------|---------|----------|
 |Local Evaluation|✅|✅|✅|✅|
-|Feature Flag Metrics|✅|❌|✅|❌|
+|Built-in Metrics|✅|❌|✅|❌|
 |React Native Support|✅|✅|✅|✅|
+|Authentication|✅|✅|✅|✅|
 

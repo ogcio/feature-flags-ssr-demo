@@ -1,5 +1,5 @@
 import type { Context } from 'unleash-client'
-import { FeatureFlags, reduceFeatureFlags } from '~/feature-flags'
+import { FeatureFlags } from '~/feature-flags'
 import { getUnleashClient } from '~/services/unleash.server'
 import type { User } from '~/services/user.mock.server'
 

@@ -1,4 +1,4 @@
-import { FeatureFlags, reduceFeatureFlags } from '~/feature-flags'
+import { FeatureFlags } from '~/feature-flags'
 import { getGrowthbookClient } from '~/services/growthbook.server'
 import type { User } from '~/services/user.mock.server'
 
