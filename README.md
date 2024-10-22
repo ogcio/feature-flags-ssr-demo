@@ -236,12 +236,177 @@ The application looks for a feature flag named `{backend}-test-flag` in each bac
 - Check that the feature flag is green in the application for the user you're logged in with
 - Logout, login with another user and check that the feature flag is red
 
-## Features comparison
+## Feature Flag Services Comparison Matrix
 
-|-|Unleash|FeatBit|Flagsmith|GrowthBook|
-|-|-------|-------|---------|----------|
-|Local Evaluation|✅|✅|✅|✅|
-|Built-in Metrics|✅|❌|✅|❌|
-|React Native Support|✅|✅|✅|✅|
-|Authentication|✅|✅|✅|✅|
+### Infrastructure & Dependencies
+
+| Feature                  | Flagsmith | Unleash  | FeatBit  | GrowthBook |
+|-------------------------|-----------|----------|----------|------------|
+| Primary Database        | PostgreSQL| PostgreSQL| MongoDB  | MongoDB    |
+| Redis Requirement       | Optional  | No       | Required | Optional   |
+| Kubernetes Support      | ✅        | ✅       | ✅       | ✅         |
+| Helm Charts            | ✅        | ✅       | ✅       | ✅         |
+| Docker Images          | ✅        | ✅       | ✅       | ✅         |
+| Additional Infrastructure| InfluxDB (optional) | None | Kafka (optional) | Analytics DB¹ |
+
+¹ Supports Snowflake, BigQuery, Redshift, PostgreSQL, ClickHouse, MySQL
+
+### Core Features
+
+| Feature                  | Flagsmith | Unleash  | FeatBit  | GrowthBook |
+|-------------------------|-----------|----------|----------|------------|
+| RBAC                    | ✅        | ✅       | ✅       | ✅         |
+| SSO Integration         | Enterprise| Enterprise| Custom   | Enterprise |
+| Audit Logging           | ✅        | ✅       | ✅       | ✅         |
+| Real-time Updates       | Polling   | Polling  | WebSocket| Polling    |
+| Multi-environment       | ✅        | ✅       | ✅       | ✅         |
+| Environment Cloning     | ✅        | ✅       | ✅       | ✅         |
+| Bulk Operations         | ✅        | ✅       | ✅       | ✅         |
+
+### Developer Experience
+
+| Feature                  | Flagsmith | Unleash  | FeatBit  | GrowthBook |
+|-------------------------|-----------|----------|----------|------------|
+| SDK Language Support    | Extensive | Extensive| Limited  | Extensive  |
+| TypeScript Support      | Basic     | Good     | Basic    | Excellent  |
+| Local Override         | ✅        | ✅       | ✅       | ✅         |
+| Testing Utilities      | ✅        | ✅       | Basic    | ✅         |
+| API Type              | REST      | REST     | REST+WS  | GraphQL    |
+| Offline Mode          | ✅        | ✅       | ✅       | ✅         |
+| Documentation Quality  | High      | High     | Medium   | High       |
+
+### Targeting & Rules
+
+| Feature                  | Flagsmith | Unleash  | FeatBit  | GrowthBook |
+|-------------------------|-----------|----------|----------|------------|
+| User Targeting          | ✅        | ✅       | ✅       | ✅         |
+| Percentage Rollouts     | ✅        | ✅       | ✅       | ✅         |
+| Custom Rules            | ✅        | ✅       | ✅       | ✅         |
+| Gradual Rollouts       | ✅        | ✅       | ✅       | ✅         |
+| Custom Attributes      | ✅        | ✅       | ✅       | ✅         |
+| Rule Complexity        | Medium    | High     | Medium   | High       |
+
+### Analytics & Experimentation
+
+| Feature                  | Flagsmith | Unleash  | FeatBit  | GrowthBook |
+|-------------------------|-----------|----------|----------|------------|
+| A/B Testing             | Basic     | Good     | Basic    | Excellent  |
+| Statistical Analysis    | Limited   | Basic    | Limited  | Advanced   |
+| Custom Metrics         | ✅        | ✅       | ✅       | ✅         |
+| Visual Analytics       | Basic     | Good     | Basic    | Excellent  |
+| Experiment Types       | Basic     | Multiple | Basic    | Advanced   |
+| Data Export            | ✅        | ✅       | ✅       | ✅         |
+
+### Performance & Scaling
+
+| Feature                  | Flagsmith | Unleash  | FeatBit  | GrowthBook |
+|-------------------------|-----------|----------|----------|------------|
+| Local SDK Cache         | ✅        | ✅       | ✅       | ✅         |
+| Avg. Latency (cached)   | ~20ms     | ~10ms    | ~15-25ms | ~10-15ms   |
+| Horizontal Scaling      | ✅        | ✅       | ✅       | ✅         |
+| Bulk Evaluation         | ✅        | ✅       | ✅       | ✅         |
+| Real-time Sync         | Polling   | Polling  | WebSocket| Polling    |
+
+### Operations & Maintenance
+
+| Feature                  | Flagsmith | Unleash  | FeatBit  | GrowthBook |
+|-------------------------|-----------|----------|----------|------------|
+| Prometheus Metrics      | ✅        | ✅       | ✅       | ✅         |
+| Health Checks          | ✅        | ✅       | ✅       | ✅         |
+| Backup Support         | ✅        | ✅       | ✅       | ✅         |
+| Migration Tools        | ✅        | ✅       | Limited  | ✅         |
+| Setup Complexity       | Medium    | Medium   | High     | Medium-High |
+| Maintenance Overhead   | Medium    | Low      | High     | Medium     |
+
+#### OpenTelemetry Support
+Unleash has the most mature OpenTelemetry implementation:
+
+- Full OTLP support
+- Built-in instrumentation
+- Comprehensive tracing
+- Server and SDK support
+
+GrowthBook offers partial support:
+
+- Focused on experiment tracking
+- Good for metrics
+- Limited tracing capabilities
+
+Both Flagsmith and FeatBit:
+
+- Lack native OpenTelemetry support
+- Require manual instrumentation
+- Rely on Prometheus for basic metrics
+
+### Platform Maturity & Support
+
+| Feature                  | Flagsmith | Unleash  | FeatBit  | GrowthBook |
+|-------------------------|-----------|----------|----------|------------|
+| Community Size          | Large     | Large    | Small    | Medium     |
+| Market Maturity         | High      | High     | Low      | Medium     |
+| Enterprise Support      | ✅        | ✅       | Limited  | ✅         |
+| Documentation Quality   | High      | High     | Medium   | High       |
+| Commercial Options      | ✅        | ✅       | Limited  | ✅         |
+
+## Summary
+
+### Flagsmith
+
+For infrastructure teams, Flagsmith is well-suited for Kubernetes deployments with official Helm charts and Docker images.
+The RBAC and audit capabilities are robust, making it suitable for enterprise use cases.
+From a maintenance perspective, you'll need to consider:
+
+- Database management (PostgreSQL)
+- Cache layer (Redis recommended)
+- Monitoring setup
+- Backup strategies
+
+For developers, the learning curve is relatively gentle with good documentation and SDK support.
+
+### Unleash
+
+A few key differentiators of Unleash compared to Flagsmith:
+
+- Unleash has a more sophisticated activation strategy system built-in, offering more complex targeting rules out of the box.
+- Infrastructure-wise, Unleash is simpler as it doesn't require Redis - it uses a built-in caching mechanism.
+- The typing system for feature flags is more structured, which can help with maintenance but requires more initial learning.
+- The free version has more built-in capabilities, though some enterprise features are still restricted.
+
+### Featbit
+
+Key points to highlight about FeatBit:
+
+- It's more infrastructure-heavy than both Flagsmith and Unleash, requiring both MongoDB and Redis.
+- The WebSocket-first approach provides real-time updates but adds complexity.
+Being newer in the market means:
+
+- Less mature ecosystem
+- More potential for rapid changes
+- Smaller community support
+- More flexibility for custom needs
+
+### GrowthBook
+
+Key differentiators of GrowthBook:
+
+- It's more focused on experimentation and A/B testing than pure feature flagging
+
+  - Built-in statistical analysis
+  - Visual results dashboard
+  - Multiple experiment types
+
+Notable technical differences:
+
+- GraphQL API instead of REST
+- Strong TypeScript integration
+- More flexible analytics integrations
+
+Architecture considerations:
+
+- Similar to FeatBit with MongoDB
+- More optional components than competitors
+- Analytics pipeline as a key component
+
+The open-source focus provides more flexibility for customization but may require more internal maintenance.
+
 
